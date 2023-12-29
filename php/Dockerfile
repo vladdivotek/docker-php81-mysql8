@@ -23,10 +23,14 @@ RUN apk update && apk add \
     libmcrypt-dev \
     neovim \
     bash \
-    openssh-client
+    openssh-client \
+    postgresql-dev
 
-# Install PDO-MySQL Extension
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+## Install PDO-MySQL Extension
+#RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+
+# Install PDO-PostgreSQL Extension
+RUN docker-php-ext-install pdo_pgsql mbstring zip exif pcntl
 
 RUN apk add --update linux-headers
 

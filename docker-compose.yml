@@ -17,19 +17,36 @@ services:
         networks:
             - comments-network
 
-    # MySQL database service
+#    # MySQL database service
+#    comments-db:
+#        image: mysql:8
+#        container_name: comments-db
+#        ports:
+#            - "33061:3306"
+#        environment:
+#            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+#            MYSQL_PASSWORD: ${DB_PASSWORD}
+#            MYSQL_USER: ${DB_USERNAME}
+#            MYSQL_DATABASE: ${DB_DATABASE}
+#        volumes:
+#            - ./mysql/data:/var/lib/mysql
+#        env_file:
+#            - ./.env
+#        networks:
+#            - comments-network
+
+    # PostgresSQL database service
     comments-db:
-        image: mysql:8
+        image: postgres:latest
         container_name: comments-db
         ports:
-            - "33061:3306"
+            - "54321:5432"
         environment:
-            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}    
-            MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_DATABASE: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_DATABASE}
         volumes:
-            - ./mysql/data:/var/lib/mysql
+            - ./postgres/data:/var/lib/postgresql/data
         env_file:
             - ./.env
         networks:
